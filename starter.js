@@ -3,7 +3,38 @@
 ////////////////////////
 
 // CODE HERE
+// Each math operation is the callback function: add, subtract, multiply, divide.
 
+//Inline arrow function with implicit return
+const add = (num1, num2) => num1 + num2
+
+//Regular arrow function
+const subtract = (num1, num2) => {
+  return num1 - num2
+}
+
+//Function expression
+const multiply = function(num1, num2){
+  return num1 * num2
+}
+
+//Function declaration
+function divide(num1, num2){
+  return num1 / num2
+}
+
+// Now, let's write the higher order function: calculator()
+const calculator = (num1, num2, callback) => {
+  if((+num1) && (+num2)){
+    num1 = +num1
+    num2 = +num2
+    return callback(num1, num2)
+  }else{
+    console.log('Give me numbers')
+  }
+}
+const result = calculator(9, '6', subtract)
+// console.log(result)
 
 ///////////////////////
 ////// PET STORE //////
@@ -64,7 +95,24 @@ const catProducts = [
 ]
 
 // CODE HERE
+//These two functions are callback functions
+const applyPercentDiscount = (product, discount) => {
+  product.displayPrice = product.basePrice * (1 - discount)
+}
 
+const applyFlatRateDiscount = (product, discount) => {
+  product.displayPrice = product.basePrice - discount
+}
+
+//This function is the outer function
+const applyDiscount = (array, callback, discount) => {
+  for(let i = 0; i < array.length; i++){
+    callback(array[i], discount)
+  }
+}
+
+applyDiscount(dogProducts, applyPercentDiscount, .25)
+console.log(dogProducts)
 
 ////////////////////////
 ////// SANDWICHES //////
